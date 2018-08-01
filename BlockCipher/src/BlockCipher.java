@@ -1,14 +1,12 @@
-
+/*
+ * Encodes a string of ascii characters to hex format using a block cipher. 
+ * After the given initial vector each 8 bit block will be encrypted using the previous 8
+ * bits. Program displays the final encrypted hex message.
+ */
 import java.math.*;
 
 public class BlockCipher {
-	/*
-	 * Kevin Medara CS455 Cryptography and Network Security 2/22/17 Midterm
-	 * Project Programming Question 2 - BlockCipher.java Encodes a string of
-	 * ascii characters to hex format using a block cipher. After the given
-	 * initial vector each 8 bit block will be encrypted using the previous 8
-	 * bits. Program displays the final encrypted hex message.
-	 */
+	
 
 	/* Function to perform Exclusive or */
 	public static String xor_encrypt(String m, String k) {
@@ -50,7 +48,7 @@ public class BlockCipher {
 
 		/*
 		 * see if highest bit is set, if so add a 1, otherwise add a 0. then
-		 * move allbinary string to hex string javabinary string to hex string
+		 * move binary string to hex string javabinary string to hex string
 		 * java bits on original # to left until all bits are tested
 		 */
 		for (byte b : bytes) {
@@ -71,8 +69,8 @@ public class BlockCipher {
 
 		// XOR in 8 bit blocks beginning with initial vector
 
-		/* cipher text block array */
-		String[] ct = new String[8];
+		
+		String[] ct = new String[8]; //cipher text block array
 		ct[0] = xor_encrypt(pt[0], key);
 		encryptedBin += ct[0];//add to encrypted binary string
 
@@ -82,7 +80,7 @@ public class BlockCipher {
 			encryptedBin += ct[i].toString();// add rest to binary string
 
 		}
-
+		//convert bin to hex
 		for (int i = 0; i < encryptedBin.length(); i++) {
 			try {
 				encryptedHex = new BigInteger(encryptedBin, 2).toString(16);
@@ -91,11 +89,6 @@ public class BlockCipher {
 
 			}
 		}
-		
-		// System.out.println(encryptedHex);
-
-		// ---------------------------------------------------------------------------
-		// Please fill in your code here!!
 		// end convert to hex
 		System.out.println("Encrypted Message:\n" + encryptedHex);
 		// --------------------------------------------------------------------------------
